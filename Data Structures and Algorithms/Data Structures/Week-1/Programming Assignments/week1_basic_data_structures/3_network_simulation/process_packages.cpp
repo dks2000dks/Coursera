@@ -1,74 +1,80 @@
-#include <iostream>
-#include <queue>
-#include <vector>
+#include<iostream>
+#include<cmath>
+#include <cassert>
+#include<algorithm>
+#include <cstdlib>
+#include<vector>
+#include <sstream>
+#include <iomanip>
+#include <limits.h>
+#include<string>
+#include <math.h> 
+#include <float.h>
+#include <bitset>
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long int ll;
+#define fr(i, a, b) for (int i=a; i<=b; i++)
+#define vec1d(v,T,n,init) vector<T> v(n,init)
+#define vec2d(v,T,n,m,init) vector<vector<T>> v(n, vector<T>(m,init))
 
-struct Request {
-    Request(int arrival_time, int process_time):
-        arrival_time(arrival_time),
-        process_time(process_time)
-    {}
+void Input_Two_Vector(vector<int> &array, vector<int> &arr, int size){
+	for (int i = 0; i < size; i++){
+		cin >> array[i];
+		cin >> arr[i];
+	}
+}
 
-    int arrival_time;
-    int process_time;
-};
+void ProcessData(int S, vector<int> &v1, vector<int> &v2, int n){
+    deque<int> Q;
+    int time;
 
-struct Response {
-    Response(bool dropped, int start_time):
-        dropped(dropped),
-        start_time(start_time)
-    {}
+    fr(i,0,n-1){
+        while(!Q.empty() && Q.front() <= v1[i])
+            Q.pop_front();
 
-    bool dropped;
-    int start_time;
-};
+        if (Q.empty()){
+            time = v1[i];
+            Q.push_back(time + v2[i]);
+            cout << time << endl;
+            time = time + v2[i];
+        }
 
-class Buffer {
-public:
-    Buffer(int size):
-        size_(size),
-        finish_time_()
-    {}
+        else if (Q.size() < S){
+            if (time >= Q.back())
+                cout << time << endl;
+            Q.push_back(time + v2[i]);
+            time = time + v2[i];
+        }
 
-    Response Process(const Request &request) {
-        // write your code here
+        else{
+            cout << -1 << endl;
+            continue;
+        }
     }
-private:
-    int size_;
-    std::queue <int> finish_time_;
-};
+}
 
-std::vector <Request> ReadRequests() {
-    std::vector <Request> requests;
-    int count;
-    std::cin >> count;
-    for (int i = 0; i < count; ++i) {
-        int arrival_time, process_time;
-        std::cin >> arrival_time >> process_time;
-        requests.push_back(Request(arrival_time, process_time));
+int main(){
+    int S,n;
+    cin >> S >> n;
+
+    if (n>0 && S>0){
+        vec1d(v1,int,n,0);
+        vec1d(v2,int,n,0);
+        Input_Two_Vector(v1,v2,n);
+
+        ProcessData(S,v1,v2,n);
     }
-    return requests;
-}
 
-std::vector <Response> ProcessRequests(const std::vector <Request> &requests, Buffer *buffer) {
-    std::vector <Response> responses;
-    for (int i = 0; i < requests.size(); ++i)
-        responses.push_back(buffer->Process(requests[i]));
-    return responses;
-}
+    else if (S==0 && n>0){
+        vec1d(v1,int,n,0);
+        vec1d(v2,int,n,0);
+        Input_Two_Vector(v1,v2,n);
 
-void PrintResponses(const std::vector <Response> &responses) {
-    for (int i = 0; i < responses.size(); ++i)
-        std::cout << (responses[i].dropped ? -1 : responses[i].start_time) << std::endl;
-}
+        fr(i,0,n-1){
+            cout << -1 << endl;
+        }
+    }
 
-int main() {
-    int size;
-    std::cin >> size;
-    std::vector <Request> requests = ReadRequests();
 
-    Buffer buffer(size);
-    std::vector <Response> responses = ProcessRequests(requests, &buffer);
-
-    PrintResponses(responses);
-    return 0;
 }

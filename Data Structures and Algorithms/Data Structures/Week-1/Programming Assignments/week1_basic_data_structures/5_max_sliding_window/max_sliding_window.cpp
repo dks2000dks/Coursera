@@ -1,36 +1,58 @@
-#include <iostream>
-#include <vector>
+#include<iostream>
+#include<cmath>
+#include <cassert>
+#include<algorithm>
+#include <cstdlib>
+#include<vector>
+#include <sstream>
+#include <iomanip>
+#include <limits.h>
+#include<string>
+#include <math.h> 
+#include <float.h>
+#include <bitset>
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long int ll;
+#define fr(i, a, b) for (int i=a; i<=b; i++)
+#define vec1d(v,T,n,init) vector<T> v(n,init)
+#define vec2d(v,T,n,m,init) vector<vector<T>> v(n, vector<T>(m,init))
 
-using std::cin;
-using std::cout;
-using std::vector;
-using std::max;
+void Input_Vector(vector<int> &array, int size){
+	for (int i = 0; i < size; i++){
+		cin >> array[i];
+	}
+}
 
-void max_sliding_window_naive(vector<int> const & A, int w) {
-    for (size_t i = 0; i < A.size() - w + 1; ++i) {
-        int window_max = A.at(i);
-        for (size_t j = i + 1; j < i + w; ++j)
-            window_max = max(window_max, A.at(j));
+void MaxSlidingWindow(vector<int> &v, int n, int k){
+    deque<int> Q(k);
 
-        cout << window_max << " ";
+    fr(i,0,k-1){
+        while(!Q.empty() && v[i] >= v[Q.back()])
+            Q.pop_back();
+        Q.push_back(i);
     }
 
+    fr(i,k,n-1){
+        cout << v[Q.front()] << " ";
+
+        while(!Q.empty() && Q.front() <= i-k)
+            Q.pop_front();
+        
+        while(!Q.empty() && v[i] >= v[Q.back()])
+            Q.pop_back();
+
+        Q.push_back(i);
+    }
+    cout << v[Q.front()] << endl;
     return;
 }
 
-
-int main() {
-    int n = 0;
+int main(){
+    int n,k;
     cin >> n;
-
-    vector<int> A(n);
-    for (size_t i = 0; i < n; ++i)
-        cin >> A.at(i);
-
-    int w = 0;
-    cin >> w;
-
-    max_sliding_window_naive(A, w);
-
-    return 0;
+    vec1d(v,int,n,0);
+    Input_Vector(v,n);
+    cin >> k;
+    MaxSlidingWindow(v,n,k);
 }

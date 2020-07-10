@@ -6,7 +6,7 @@
     2. Improving Deep Neural Networks: Hyperparameter tuning, Regularization and Optimization
     3. Structuring Machine Learning Projects
     4. Convolutional Neural Networks
-    5. Sequence Model
+    5. Sequence Models
 - Repository consists of the Assignments and Lecture Slides of all 5 Courses.
 
 ## Data Structures and Algorithms
@@ -18,6 +18,13 @@
     5. Advanced Algorithms and Complexity
     6. Genome Assembly Programming Challenge
 - Repository consists of the Assignments solved in **C++** and Lecture Slides of first 3 Courses.
+
+## Learn SQL Basics for Data Science
+- 4 Course Specialization offered by **University of California, Davis**.
+    1. SQL for Data Science
+    2. Data Wrangling, Analysis and AB Testing with SQL
+    3. Distributed Computing with Spark SQL
+    4. SQL for Data Science Capstone Project
 
 ## Machine Learning
 - Machine Learning offered by Stanford University.
