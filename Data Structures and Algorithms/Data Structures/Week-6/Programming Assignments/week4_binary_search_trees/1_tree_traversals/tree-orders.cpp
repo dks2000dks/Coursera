@@ -1,101 +1,76 @@
 #include <iostream>
-#include <vector>
+#include <cmath>
+#include <cassert>
 #include <algorithm>
-#if defined(__unix__) || defined(__APPLE__)
-#include <sys/resource.h>
-#endif
+#include <cstdlib>
+#include <vector>
+#include <sstream>
+#include <iomanip>
+#include <limits.h>
+#include <string>
+#include <math.h> 
+#include <float.h>
+#include <bitset>
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long int ll;
+#define fr(i, a, b) for (int i=a; i<=b; i++)
+#define vec1d(v,T,n,init) vector<T> v(n,init)
+#define vec2d(v,T,n,m,init) vector<vector<T>> v(n, vector<T>(m,init))
 
-using std::vector;
-using std::ios_base;
-using std::cin;
-using std::cout;
+struct Node{
+  int key, left, right;
+};
 
-class TreeOrders {
+class Tree{
   int n;
-  vector <int> key;
-  vector <int> left;
-  vector <int> right;
+  vector<Node> node;
 
 public:
-  void read() {
+  void Data(){
     cin >> n;
-    key.resize(n);
-    left.resize(n);
-    right.resize(n);
-    for (int i = 0; i < n; i++) {
-      cin >> key[i] >> left[i] >> right[i];
+    node.resize(n);
+    for (int i = 0; i < n; i++)
+    {
+      cin >> node[i].key >> node[i].left >> node[i].right;
     }
   }
 
-
-  vector <int> in_order() {
-    vector<int> result;
-    // Finish the implementation
-    // You may need to add a new recursive method to do that
-
-    return result;
+  void preOrder(int index){
+    if (index != -1){
+      cout << node[index].key << ' ';
+      preOrder(node[index].left);
+      preOrder(node[index].right);
+    }
   }
 
-  vector <int> pre_order() {
-    vector<int> result;    
-    // Finish the implementation
-    // You may need to add a new recursive method to do that
-    
-    return result;
+  void postOrder(int index){
+    if (index != -1){
+      postOrder(node[index].left);
+      postOrder(node[index].right);
+      cout << node[index].key << ' ';
+    }
   }
 
-  vector <int> post_order() {
-    vector<int> result;
-    // Finish the implementation
-    // You may need to add a new recursive method to do that
-    
-    return result;
+  void inOrder(int index){
+    if (index != -1){
+      inOrder(node[index].left);
+      cout << node[index].key << ' ';
+      inOrder(node[index].right);
+    }
   }
 };
 
-void print(vector <int> a) {
-  for (size_t i = 0; i < a.size(); i++) {
-    if (i > 0) {
-      cout << ' ';
-    }
-    cout << a[i];
-  }
-  cout << '\n';
-}
 
-int main_with_large_stack_space() {
-  ios_base::sync_with_stdio(0);
-  TreeOrders t;
-  t.read();
-  print(t.in_order());
-  print(t.pre_order());
-  print(t.post_order());
+int main(){
+  Tree t;
+  t.Data();
+
+  t.inOrder(0);
+  cout << endl;
+  t.preOrder(0);
+  cout << endl;
+  t.postOrder(0);
+  cout << endl;
   return 0;
 }
-
-int main (int argc, char **argv)
-{
-#if defined(__unix__) || defined(__APPLE__)
-  // Allow larger stack space
-  const rlim_t kStackSize = 16 * 1024 * 1024;   // min stack size = 16 MB
-  struct rlimit rl;
-  int result;
-
-  result = getrlimit(RLIMIT_STACK, &rl);
-  if (result == 0)
-  {
-      if (rl.rlim_cur < kStackSize)
-      {
-          rl.rlim_cur = kStackSize;
-          result = setrlimit(RLIMIT_STACK, &rl);
-          if (result != 0)
-          {
-              std::cerr << "setrlimit returned result = " << result << std::endl;
-          }
-      }
-  }
-#endif
-
-  return main_with_large_stack_space();
-}
-
