@@ -17,7 +17,7 @@
     4. Algorithms on Strings
     5. Advanced Algorithms and Complexity
     6. Genome Assembly Programming Challenge
-- Repository consists of the Assignments solved in **C++** and Lecture Slides of first 3 Courses.
+- Repository consists of the Assignments solved in **C++** and Lecture Slides of first 2 Courses.
 
 ## Learn SQL Basics for Data Science
 - 4 Course Specialization offered by **University of California, Davis**.

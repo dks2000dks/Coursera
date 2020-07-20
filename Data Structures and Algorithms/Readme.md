@@ -4,4 +4,3 @@ It is a 6 Course Specialization offered by **University of California San Diego*
 ### Courses:
 1. Algorithmic Toolbox
 2. Data Structures
-3. Algorithms on Graphs
