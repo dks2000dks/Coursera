@@ -28,3 +28,10 @@
 
 ## Machine Learning
 - Machine Learning offered by Stanford University.
+
+## Mathematics for Data Science
+- 4 Course Specialization offered by **National Research University Higher School of Economics**.
+    1. Discrete Math and Analyzing Social Graphs
+    2. Calculus and Optimization for Machine Learning
+    3. First Steps in Linear Algebra for Machine Learning
+    4. Probability Theory, Statistics and Exploratory Data Analysis
